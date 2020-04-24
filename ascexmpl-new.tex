@@ -179,9 +179,9 @@ In order to include the tolls in the scenario, a shape file was built with lines
 %OK
 \subsection{Calibration}
 
-The main goal of the calibration process is to end up with a model capable to replicate some predefined set of observed conditions, such as modal split, traffic flow or distributions of travel times and distances. In this work, the improved-scenario was calibrated to replicate the observed modal split and hourly traffic flow in specific counting stations distributed across the city \citep{AFOROS2013}. Different initial settings were explored with the $\pi_{1}^{f}$ population in order to know the simulator response with a light-weight scenario. A similar methodology was then applied to the scenario with the $\pi_{10}^{f}$ population.
+The main goal of the calibration process is to end up with a model able to replicate some predefined set of observed conditions, such as modal split, traffic flow or distributions of travel times and distances. In this work, the improved-scenario was calibrated to replicate the observed modal split and hourly traffic flow in specific counting stations distributed across the city \citep{AFOROS2013}. Different initial settings were explored with the $\pi_{1}^{f}$ population in order to know the simulator response with a light-weight scenario. The final initial setting was then applied to the scenario with the $\pi_{10}^{f}$ population.
 
-The initial step in this process was to calibrate the modal split, which was achieved by changing the values of the Alternative Specific Constants (ASCs) iteratively based on the expression proposed by \cite{manski1977estimation} to correct ASCs of Logit models estimated with endogenous samples. Let $P_{obs}(m)$ be the observed modal split of mode $m$ in the ODS and $P_{n}^{s}(m)$ the corresponding modal split in MATSim after $n$ iterations for the $s_{th}$ simulation \footnote{Recall that a simulation is composed of multiple iterations}, then the correction of the ASCs was made based on,
+The initial step in this process was to calibrate the modal split, which was achieved by changing the values of the Alternative Specific Constants (ASCs) iteratively based on the expression proposed by \cite{manski1977estimation}. Let $P_{obs}(m)$ be the observed modal split of mode $m$ in the ODS and $P_{n}^{s}(m)$ the corresponding modal split in MATSim after $n$ iterations for the $s_{th}$ simulation \footnote{Recall that a simulation is composed of multiple iterations}, then the correction of the corresponding ASC was made based on,
 \begin{equation}
 C_{m}^{s+1}=C_{m}^{s}-\ln\Bigg(\frac{P_{n}^{s}(m)}{P_{obs}(m)}\Bigg)
 \end{equation}
@@ -208,16 +208,16 @@ Finally, the modified agents' utility is given by,
 \tilde{S}_{\mathit{i}}=S_{\mathit{i}}+w\sum_{ak\in \mathit{i}}\Delta S_{a}(k)
 \end{equation}
 
-where $i$ represents a particular plan, so the sum in \ref{modifiedUtility} is made over all the links and hours within plan $i$ that contain information about traffic counts, and $w$ is a weight parameter defined before Cadyts application. It is important to note that, since the scenarios are scaled in terms of the number of agents (1\% and 10\% of the real Santiago's population) the simulated traffic flows were amplified in order to be congruent with the magnitude of traffic counts.
+where $i$ represents a particular plan, so the sum in (\ref{modifiedUtility}) is made over all the links and hours within plan $i$ that contain information about traffic counts, and $w$ is a weight parameter defined before Cadyts application. It is important to note that, since the scenarios are scaled in terms of the number of agents (1\% and 10\% of the real Santiago's population) the simulated traffic flows were amplified in order to be congruent with the magnitude of traffic counts.
 
-When simulating large-scale scenarios, it is recommended to control the oscillations of agents' behavior between one iteration and the next \citep{MATSimSantiago}, which is achieved by controlling the re-planning step. In this work, the modal split calibration considered that during the first 80\% of iterations within a simulation, 15\% of agents explore new routes, another 15\% explore new modes (between \emph{car}, \emph{public transport} y \emph{walk}) and the remaining 70\% choose between plans that were already explored in the past. During the final 20\% of iterations, the re-planning step was turned off, so agents can choose only between plans already existing in their memories, and forcing the convergence of scores through the method of successive averages (MSA). The plan selection by every agents is made assuming a changing-plan probability that depends on $\exp(\Delta_{score})$, where $\Delta_{score}$ is the difference between two plans score \citep{ConfiguringMATSim}
+When simulating large-scale scenarios, it is recommended to control the oscillations of agents' behavior between one iteration and the next \citep{MATSimSantiago}, which is achieved by controlling the re-planning step. In this work, the modal split calibration assumed that during the first 80\% of iterations within a simulation, 15\% of agents explore new routes, another 15\% explore new modes (between \emph{car}, \emph{public transport} y \emph{walk}) and the remaining 70\% choose between plans that were already explored in the past. During the final 20\% of iterations, the re-planning step was turned off, so agents can choose only between plans already existing in their memories, and forcing the convergence of scores through the method of successive averages (MSA). The plan selection by every agents is made assuming a changing-plan probability that depends on $\exp(\Delta_{score})$, where $\Delta_{score}$ is the difference between two plans scores \citep{ConfiguringMATSim}
+%OK
+Since the calibration of traffic volumes started from the iteration with calibrated modal splits, Cadyts was applied assuming that agents could re-plan only in terms of new routes. Similar to the modal split calibration process, the re-planning in this case was carried out only for the first 80\% of iterations, and then turned off for the final 20\%.
 
-Since the calibration of traffic volumes was considered to start from the iteration with calibrated modal splits, Cadyts was applied assuming that agents could re-plan only in terms of new routes. Similar to the modal split calibration process, the re-planning in this case was considered only during the first 80\% of iterations, and then turned off for the final 20\%.
-
-Two stability-simulations were run for 1\% and 10\% cases in order to check if changes made by the modal split and traffic volumes calibration processes were persistent once Cadyts is turned off . The first stability-simulation (\emph{stability-test with innovation}) considered a normal re-planning, that is, during the first 80\% of the iterations, 15\% of agents were able to change between routes, another 15\% were able to explore new modes, and the remaining 70\% choose between plans already explored. Finally, during the final 20\% of the iterations, the agents only can change between plans already explored, and scores are averaged through MSA. The second stability-simulation (\emph{stability-test without innovation}) assumes no re-planning at all, so scores are averaged through MSA from the simulation start. Also, the 1\% Case was simulated from an increased number of iterations with the ASCs$^{*}$ already found in the modal-split calibration process in order to check the simulator response to changes in this variable (\emph{modal-split stability-test})
-
+Two stability-simulations were run for 1\% and 10\% cases in order to check if changes made by the modal split and traffic volumes calibration processes were stable once Cadyts were turned off . The first stability-simulation (\emph{stability-test with innovation}) considered a re-planning where 15\% of agents were able to change between routes, another 15\% were able to explore new modes, and the remaining 70\% choose between plans already explored for the first 80\% of the iterations. For the final 20\% of the iterations, agents changed between already explored plans, and scores were averaged through MSA. The second stability-simulation (\emph{stability-test without innovation}) assumed no re-planning at all, so scores were averaged through MSA from the simulation start. Also, the 1\% Case was simulated from an increased number of iterations with the ASCs$^{*}$ already found in the modal-split calibration process in order to check the stability of this particular result (\emph{modal-split stability-test}).
+%OK
 \subsubsection{Calibration and stability tests results}
-Tables \ref{table:modal_splits_1pct} and \ref{table:modal_splits_10pct} show the results of the modal-split calibration process for the 1 and 10\% cases. In this case, it is important to note that, in both scenarios, agents were able to choose only between car, public transport, and walk, so both observed and simulated modal splits were scaled up such that they add up 100\%. In both tables, subscripts denote the iteration number inside a given simulation, and superscripts denote the simulation number. In the 1\% case, the calibrated scenario was obtained for the 30th simulation, and in the 10\% it was obtained for the 7th one. The reference iteration to evaluate the modal splits and their similarity with the observed ones is iteration 100 for both cases.
+Tables \ref{table:modal_splits_1pct} and \ref{table:modal_splits_10pct} show the results of the modal-split calibration process for the 1 and 10\% cases. It is important to note that, in both scenarios, agents were able to choose only between car, public transport, and walk, so both observed and simulated modal splits were scaled up such that they add up 100\%. In both tables, subscripts denote the iteration number inside a given simulation, and superscripts denote the simulation number. In the 1\% case, the calibrated scenario was obtained for the 30th simulation, and in the 10\% it was obtained for the 7th one. The reference iteration to evaluate the modal splits and their similarity with the observed ones is iteration 100 for both cases.
 
 \begin{table}
 \caption{Alternative specific constants and modal splits for 1\% case.}
@@ -246,7 +246,7 @@ Modo                      &$\tilde{P}_{obs}(m)$ [\%]& $ASC^{0}(m)$	& $\tilde{P}_
 	\end{tabular}
 \label{table:modal_splits_10pct}
 \end{table}
-
+%OK
 For the traffic volumes calibration, Cadyts was applied in both 1\% and 10\% during $n_{c}=500$ iterations from iteration 100 (which corresponds to the modal-split calibrated scenario). The parameters $\lambda$, $\sigma^{2}_{min}$ of Equation \ref{modifiedVariance} and $w$ of Equation \ref{modifiedUtility} were maintained with their default values of $\lambda=1$, $\sigma^{2}_{min}=25^2$ [veh/h]$^2$ and $w=30$. The results are shown graphically in Figures \ref{fig:obs_vs_sim_1pct} and \ref{fig:obs_vs_sim_10pct} for the 1\% and 10\% case, respectively.
 
 \begin{figure}[h!]
@@ -265,6 +265,7 @@ For the traffic volumes calibration, Cadyts was applied in both 1\% and 10\% dur
 	\label{fig:obs_vs_sim_10pct}
 \end{figure}
 %Figure of hourly GEH for it 100 and 600 for 1% and 10%?
+%OK
 In terms of stability, Table \ref{table:1pct_modalSplitEvolution} shows the evolution of modal splits through the final iterations for the 1\% case. The modal-split stability-test corresponds to a $n_{e1}=500$ iterations simulation starting from iteration 0 with ASCs$^{*}$ The stability-test with and without innovations corresponds to a $n_{e2}=200$ iterations simulations starting from iteration 600 (modal-split and traffic volumes calibrated scenario).
 
 \begin{table}
@@ -301,9 +302,9 @@ Similarly, Table \ref{table:10pct_modalSplitEvolution} shows the evolution of mo
 \end{table}
 
 %Talk about the similarity of modal splits between different scenarios in both 1% and 10% cases.
-Observing the previous tables, it can be seen that the modal-split behavior is stable throughout the different simulations in both the 1\% and 10\% cases, in spite of the agents' utility modification made by Cadyts. In general, it can be assumed that the iteration 100 is sufficiently representative in terms of modal splits, such that (1) the scoring modification made by Cadyts and (2) a higher number of iterations will not affect significantly the modal splits given the simulator set-up used in this work. %Talk about the max. variation between modal splits in each case.
-
-To summarize how close the simulated counts are to the observed ones, Table \ref{table:1pct_fitEvolution} and \ref{table:10pct_fitEvolution} show the linear regression parameters built assuming the observed counts as the independent variable for the 1\% and 10\% cases (intercept, slope and R$^2$ statistic).
+Observing the previous tables, it can be seen that the modal-split behavior is stable throughout the different simulations in both the 1\% and 10\% cases, in spite of the agents' utility modification made by Cadyts in between. In general, it can be assumed that the iteration 100 is sufficiently representative in terms of modal splits, such that a higher number of iterations will not affect significantly the modal splits given the simulator set-up used in this work. %Talk about the max. variation between modal splits in each case.
+%OK
+To summarize how close the simulated and observed counts are, Table \ref{table:1pct_fitEvolution} and \ref{table:10pct_fitEvolution} show the linear regression parameters built considering the observed counts and simulated counts as the independent and dependent variable, respectively, for the 1\% and 10\% cases (intercept, slope and R$^2$ statistic).
 
 \begin{table}
 	\caption{Linear regression parameters evolution through the final iterations for the 1\% case.}
@@ -336,12 +337,12 @@ To summarize how close the simulated counts are to the observed ones, Table \ref
 	\end{tabular}
 \end{table}
 
-In the case of traffic volume calibration, both Table \ref{table:1pct_fitEvolution} and \ref{table:10pct_fitEvolution} show (1) an over-estimation of traffic volumes by the simulator when observed traffic counts are 0 since intercepts are all greater than $2000$ veh/day and (2) a systematic under-estimation of traffic volumes since the slope coefficients are all lesser than 1. In both cases, it can be seen the effect of Cadyts in the three linear regression parameters, making intercepts decrease towards zero, slopes increase towards 1, and increasing the $R^2$ statistic. The \emph{stability-test with innovation} shows, however, that the simulator behavior once Cadyts is turned off, is not persistent. This happens because changes made by including adding terms in the agents' utility function are erased once Cadyts is turned off.
-
+In the case of traffic volume calibration, both Table \ref{table:1pct_fitEvolution} and \ref{table:10pct_fitEvolution} show (1) an over-estimation of traffic volumes by the simulator when observed traffic counts are 0 since intercepts are all greater than $2.000$ veh/day and (2) a systematic under-estimation of traffic volumes since the slope coefficients are all lesser than 1. In both cases, it can be seen the effect of Cadyts in the three linear regression parameters, making intercepts decrease towards zero, slopes increase towards 1, and increasing the $R^2$ statistic. The \emph{stability-test with innovation} shows, however, that the simulator behavior once Cadyts is turned off, does not persist. This happens because changes made by including adding terms in the agents' utility function are erased once Cadyts is turned off.
+%OK
 \section{Illustration: Scaling effect and Policy Analysis}
 %Travel times
 %Travel distances.
-Once the calibration process is achieved, the scenarios are useful to make policy analyses. Also, since this work considered synthetic populations representative of the 1\% and 10\% of the Santiago's population, they are also useful to test the scaling effect in the simulation.
+After the calibration process, the scenarios were useful to make policy analyses. Also, since this work considered synthetic populations representative of the 1\% and 10\% of the Santiago's population, they were also useful to test the scaling effect in the simulation.
 \subsection{Scaling effect}
 \label{sect:scaling_effect}
 1\% and 10\% calibrated scenarios were compared in terms of distance and travel times distributions made by car mode\footnote{pt and walk mode analyses were neglected since those modes were not simulated in the road network}. Relative frequency histograms were built with data of the 24 hours, filtering those trips with null travel times or distances, shown in Figure \ref{fig:times_distance_comparison}. 
@@ -366,16 +367,16 @@ Once the calibration process is achieved, the scenarios are useful to make polic
 	\label{fig:times_distance_comparison}
 \end{figure}
 
-Observing the traveled distances distribution, it can be seen that there is no notable difference between 1\% and 10\% cases, which can be interpreted as no effect in assignment made by scenario scaling. Traveled distances distribution for the Stability-test with innovation Scenario was also built to ensure that this conclusion was not dependent on Cadyts effect (see Figure \ref{fig:times_distance_comparison}, (a) and (b)). These figures validate the use of this type of scaling in MATSim scenarios for travel distances analyses.
-The above conclusion does not hold for the travel times. Observing Figure \ref{fig:times_distance_comparison}, (c), it can be seen that, in general, travel times for the 1\% case are greater than the ones for the 10\% case. This phenomenon occur due to the link capacities scaling method, which is achieved by multiplying the real capacities by a scaling factor equals to the synthetic population sample rate. In the 1\% case, capacities were scaled down to 1\%, which affects most importantly to links with small capacities. In particular, a great reduction in link capacities creates an over-estimation of the travel times, since a small amount of vehicles entering those small-capacity links create false congestion effects. This poses a warning in utilizing scenarios with a reduced number of agents ($<=1\%$) and scaled using the method presented in this work, if one wants to use the scenario to travel time analyses.
-
+Observing the traveled distances distribution, it can be seen that there is no notable difference between 1\% and 10\% cases, which can be interpreted as no effect in the assignment-step attributable to the scenario scaling. Traveled distances distribution for the Stability-test with innovation Scenario was also built to ensure that this conclusion was not dependent on Cadyts effect (see Figure \ref{fig:times_distance_comparison}, (a) and (b)). These figures validate the use of this type of scaling in MATSim scenarios for travel distances analyses, although a more rigorous statistical tests should be carried out to ensure this conclusion.
+The above conclusion does not hold for the travel times. Observing Figure \ref{fig:times_distance_comparison}, (c), it can be seen that, in general, travel times for the 1\% case are greater than the ones for the 10\% case. This phenomenon occur due to the link capacities scaling method, where real capacities are multiplied by a scaling factor equals to the synthetic population sample rate. In the 1\% case, capacities were scaled down to their 1\%, affecting most importantly to links with small capacities. In particular, a great reduction in link capacities creates an over-estimation of the travel times, since a small amount of vehicles entering those small-capacity links create false congestion effects. This poses a warning in utilizing scenarios with a reduced number of agents ($<=1\%$) and scaled using the method presented in this work, if one wants to use the scenario to travel time analyses.
+%OK
 \subsection{Evaluation of a congestion pricing scheme}
 
 The Calibrated Scenarios were used to evaluate a particular congestion pricing scheme and the results were compared with those obtained by \cite{gleave2009tarificacion} using the classical transport modeling approach in order to asses the level of sensitivity of the agent-based model used in this work.
-
+%OK
 \subsubsection{Schemes description}
-The types of schemes considered are cordon-based, such as the ones highlighted in Figure \ref{fig:congestion_pricing_schemes}. These schemes were originally proposed and evaluated by \cite{gleave2009tarificacion} using the ESTRAUS model \citep{ESTRAUS}, applied in its \emph{modal split - assignment} modality, meaning that the model considered changes in trip modes, routes and start times. The schemes were actively applied between 07:30 and 10:00 (morning peak, MP) and between 18:00 and 20:00 (evening peak, EP). The scenario used in that case was representative of the year 2015. The entry-link charge was defined first since vehicles using those links were considered to increase the congestion level inside the cordon. Later, exit-link charge was calculated proportionally to the ratio between exit and entry flow in the base case scenario, and the entry-link charge. Users traveling inside the area were not charged at all. 
-
+The types of schemes considered in this work are cordon-based, such as the ones highlighted in Figure \ref{fig:congestion_pricing_schemes}. These schemes were originally proposed and evaluated by \cite{gleave2009tarificacion} using the ESTRAUS model \citep{ESTRAUS}, applied in its \emph{modal split - assignment} modality, meaning that the model considered changes in trip modes, routes and start times. The schemes were actively applied between 07:30 and 10:00 (morning peak, MP) and between 18:00 and 20:00 (evening peak, EP). The scenario used in that case was representative of 2015. The entry-link charge was defined first since vehicles using those links were considered to increase the congestion level inside the cordon. Exit-link charge was calculated proportionally to the ratio between exit and entry flow in the base case scenario. Users traveling inside the area were not charged at all. 
+%OK
 Given this input information, the charges used in the present work were the highest ones proposed in the reference study (see Table \ref{table:cordon_charges}). Simulations of 200 iterations were run from Calibrated Scenarios considering the (a) Outer cordon and (b) Triangle cordon schemes, whose results were compared with the Stability-test with innovation scenario, which represents the \emph{business as usual} case. This comparison was made for the 1\% and 10\% cases.
 
 \begin{figure}[h!]
@@ -402,7 +403,7 @@ Given this input information, the charges used in the present work were the high
 
 \subsubsection{Results}
 
-Daily modal splits variation for both 1\% and 10\% cases are shown in Figure \ref{fig:modal_split_results}. The results show a decrease in the modal split for car, and an increase in the modal split for public transport and walk modes, for both the 1\% and 10\% cases in the Outer and Triangle cordon scenarios (from now on, OT and TC, respectively), compared to the Stability Test with Innovation scenario (from now on ST). The magnitude of the change in modal splits is clearly greater in the OC than in the TC scenario, in spite of the high fare magnitude considered. 
+Daily modal splits variations for both 1\% and 10\% cases are shown in Figure \ref{fig:modal_split_results}. The results show a decrease in the modal split for car, and an increase in the modal split for public transport and walk modes, for both the 1\% and 10\% cases in the Outer and Triangle cordon scenarios (from now on, OT and TC, respectively), compared to the Stability Test with Innovation scenario (from now on ST). The magnitude of the variation in modal splits is clearly greater in the OC than in the TC scenario, in spite of the high fare magnitude considered. 
 
 \begin{figure}[h!]
 	\centering
@@ -428,7 +429,7 @@ The number of car legs for both 1\% and 10\% cases between 07:30 and 08:30 are s
 	\end{tabular}
 \end{table}
 %% Total travel time
-Another interesting variable to analyze is the total traveled time and total traveled distances consumed during 07:30 and 08:30, summarized in Table \ref{table:travel_time_variation} and Table \ref{table:travel_distance_variation}, respectively.
+Another interesting variable to analyze is the total traveled time and total traveled distances during 07:30 and 08:30, summarized in Table \ref{table:travel_time_variation} and Table \ref{table:travel_distance_variation}, respectively.
 
 \begin{table}[h!]
 	\centering
@@ -449,8 +450,8 @@ Another interesting variable to analyze is the total traveled time and total tra
 		\cline{1-7} 
 	\end{tabular}
 \end{table}
-
-Observing Table \ref{table:travel_time_variation}, it can be seen there exist a reduction in total traveled time in car mode and an increase in public transport and walk modes, for both congestion schemes and for 1\% and 10\% cases. Also, it can be seen that the 1\% case present a higher variation in travel times for car mode compared to the 10\% case, result that should be seen with caution since the scenario scaling affects notoriously the travel time per kilometer distribution, as was already commented in Section \ref{sect:scaling_effect}. Table \ref{table:travel_time_variation_car_pt} shows the total traveled time percentage variation if only car and public transport mode are considered, results that can be compared with the results obtained by \cite{gleave2009tarificacion}. In this case, the travel time savings for the Outer Cordon in 1\% case are about three times higher than the saving for the Triangle Cordon scenario, results that are closer to the ones obtained in \cite{gleave2009tarificacion} who obtained savings for the Outer Cordon about two times higher compared to the Triangle Cordon. On the other hand, the Outer Cordon in 10\% case present travel time savings about twelve times higher than the ones for the Triangle Cordon scenario. 
+%OK
+Observing Table \ref{table:travel_time_variation}, it can be seen there exist a reduction in total traveled time in car mode and an increase in public transport and walk modes, for both congestion schemes and for 1\% and 10\% cases. Also, it can be seen that the 1\% case presents a higher variation in travel times for car mode compared to the 10\% case, result that should be seen with caution since the scenario scaling affects notoriously the travel time per kilometer distribution, as was already commented in Section \ref{sect:scaling_effect}. Table \ref{table:travel_time_variation_car_pt} shows the total traveled time percentage variation if only car and public transport mode are considered, results that can be compared with the results obtained by \cite{gleave2009tarificacion}. In this case, the travel time savings for the Outer Cordon in 1\% case are about three times higher than the saving for the Triangle Cordon scenario, results that are closer to the ones obtained in \cite{gleave2009tarificacion} who obtained savings for the Outer Cordon about two times higher compared to the Triangle Cordon. On the other hand, the Outer Cordon in 10\% case present travel time savings about twelve times higher than the ones for the Triangle Cordon scenario. 
 
 \begin{table}
 	\centering
@@ -493,7 +494,7 @@ This work presented the development of an scenario and a first application of an
 
 First, a previous synthetic population \citep{MATSimSantiago} was enhanced in order to increase the resemble with the real Santiago's population: the number of agents was blown up using expansion factors determined by \cite{Contreras2015}, the activities location of the cloned agents were randomized using land-use data and their respective trip start times were modified using smartcard data, process that ended up with two scenarios representative of 1\% and 10\% of the total population of Santiago. In addition to this, some aspects of the network were improved, such as the addition of the tolls to the tollways. Later, the improved scenarios were calibrated in terms of modal splits calculated from the ODS and traffic counts from a previous study \citep{AFOROS2013}. Finally, both scenarios were used to asses a congestion pricing scheme and outputs (changes in daily modal splits, number of car legs, total traveled time by mode and total traveled distance in car mode) were compared to the ones obtained by \cite{gleave2009tarificacion}. In general, it was found that agents in MATSim reacted in a more sensitive way compared to ESTRAUS,  estimating a grater percentage of change in all the indicators analyzed in this study. 
 
-Possible next steps of this work are continuing to enhance the scenario, this time in terms of public transport simulation using as input the GPS data of the public transport system of Santiago, using a map matching algorithm. This would increase even more the realism of the simulation. Also, it is highly necessary to explore other calibration methodologies, particularly automatic ones such as the Opdyts tool proposed by \cite{flotterod2017search}
+Possible next steps of this work are continuing the scenario enhancement, this time in terms of public transport simulation using as input the GPS data of the public transport system of Santiago, together with a map matching algorithm. Also, it is highly necessary to explore other calibration methodologies, particularly automatic ones such as the Opdyts tool proposed by \cite{flotterod2017search}
 
 
 \appendix
@@ -503,16 +504,6 @@ Possible next steps of this work are continuing to enhance the scenario, this ti
 %   Note that this and all appendices (except the references) start with 
 %   the \section command
 %
-\section{Notation}
-\label{app:notation}
-\emph{The following symbols are used in this paper:}%\par\vspace{0.10in}
-\nopagebreak
-\par
-\begin{tabular}{r  @{\hspace{1em}=\hspace{1em}}  l}
-$D$                    & pile diameter (m); \\
-$R$                    & distance (m);      and\\
-$C_{\mathrm{Oh\;no!}}$ & fudge factor.
-\end{tabular}
 
 %\bibliographystyle{apalike-es}
 \bibliography{ascexmpl-new}

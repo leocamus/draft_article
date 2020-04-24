@@ -1,0 +1,182 @@
+\begin{table}
+\caption{Alternative specific constants and modal splits for 1\% case.}
+\begin{tabular}{c|c|cc|cc}
+\hline
+Modo                      &$\tilde{P}_{obs}(m)$ [\%]& $ASC^{0}(m)$ & $\tilde{P}_{50}^{0}(m)$ [\%] & $ASC^{*}(m)$& $\tilde{P}_{100}^{*}(m)$ [\%]\\
+\hline
+\emph{Car}                & 30,164 & 0,000 & 22,829 & 1,265  & 30,811 \\
+\emph{Public Transport}   & 29,343 &-1,058 & 35,344 & -0,695 & 28,187 \\
+\emph{Walk}               & 40,493 &-0,143 & 41,827 & -1,183 & 41,002 \\
+\hline
+\end{tabular}
+\label{table:modal_splits_1pct}
+\end{table}
+\efloatseparator
+ 
+\begin{table}
+\caption{Alternative specific constants and modal splits for 10\% case.}
+\begin{tabular}{c|c|cc|cc}
+\hline
+Modo                      &$\tilde{P}_{obs}(m)$ [\%]& $ASC^{0}(m)$ & $\tilde{P}_{50}^{0}(m)$ [\%] & $ASC^{*}(m)$& $\tilde{P}_{100}^{*}(m)$ [\%]\\
+\hline
+\emph{Car}                & 30,164 & 0,000 & 24,762 & 0,838  & 29,624 \\
+\emph{Public Transport}   & 29,343 &-1,058 & 34,263 & -1,676 & 29,331 \\
+\emph{Walk}               & 40,493 &-0,143 & 40,975 & -0,254 & 41,045 \\
+\hline
+\end{tabular}
+\label{table:modal_splits_10pct}
+\end{table}
+\efloatseparator
+ 
+\begin{table}
+\caption{Modal split evolution of car mode through the final iterations for the 1\% case.}
+\label{table:1pct_modalSplitEvolution}
+\begin{tabular}{ccccc}
+\hline
+Scenario & Iteration & $\tilde{P}_{n}(car)$ [\%] &  $\tilde{P}_{n}(PT)$ [\%]&$\tilde{P}_{n}(walk)$ [\%] \\
+\hline
+Modal-split calibrated & 100 & 30,811 & 28,187 & 41,002 \\
+Modal-split stability-test & 500 & 31,596 & 27,810 & 40,594 \\
+Modal-split and traffic volumes calibrated & 600 & 30,428 & 28,767 & 40,805 \\
+Stability-test with innovation & 800 & 31,424 & 27,985 & 40,591 \\
+Stability-test without innovation & 800 & 30,437 & 28,760 & 40,802 \\
+\hline
+\end{tabular}
+\end{table}
+\efloatseparator
+ 
+\begin{table}
+\caption{Modal split evolution of car mode through the final iterations for the 10\% case.}
+\label{table:10pct_modalSplitEvolution}
+\begin{tabular}{ccccc}
+\hline
+Scenario & Iteration & $\tilde{P}_{n}(car)$ [\%] &  $\tilde{P}_{n}(PT)$ [\%]&$\tilde{P}_{n}(walk)$ [\%] \\
+\hline
+Modal-split calibrated & 100 & 29,624 & 29,331 & 41,045 \\
+Modal-split and traffic volumes calibrated & 600 & 29,548 & 29,749 & 40,702 \\
+Stability-test with innovation & 800 & 30,333 & 29,113 & 40,554 \\
+Stability-test without innovation & 800 & 29,559 & 29,738 & 40,703 \\
+\hline
+\end{tabular}
+\end{table}
+\efloatseparator
+ 
+\begin{table}
+\caption{Linear regression parameters evolution through the final iterations for the 1\% case.}
+\label{table:1pct_fitEvolution}
+\begin{tabular}{ccccc}
+\hline
+Scenario & Iteration & Intercept &  Slope & R$^{2}$ statistic \\
+\hline
+Modal-split calibrated & 100 & 9.392,0  & 0,25 & 0,04 \\
+Modal-split stability-test & 500 & 10.634,7 & 0,14 & 0,01 \\
+Modal-split and traffic volumes calibrated & 600 & 2.108,8  & 0,67 & 0,54 \\
+Stability-test with innovation & 800 & 9.981,3  & 0,19 & 0,02 \\
+Stability-test without innovation & 800 & 4.263,4  & 0,41 & 0,26 \\
+\hline
+\end{tabular}
+\end{table}
+\efloatseparator
+ 
+\begin{table}
+\caption{Linear regression parameters evolution through the final iterations for the 10\% case.}
+\label{table:10pct_fitEvolution}
+\begin{tabular}{ccccc}
+\hline
+Scenario & Iteration & Intercept &  Slope & R$^{2}$ statistic \\
+\hline
+Modal-split calibrated & 100 & 9.379,5  & 0,18 & 0,02 \\
+Modal-split and traffic volumes calibrated & 600 & 4.490,7  & 0,50 & 0,28 \\
+Stability-test with innovation & 800 & 10.014,9 & 0,10 & 0,01 \\
+Stability-test without innovation & 800 & 5.661,7  & 0,36 & 0,14 \\
+\hline
+\end{tabular}
+\end{table}
+\efloatseparator
+ 
+\begin{table}[h!]
+\centering
+\caption{Entry and exit charges in Outer and Triangle schemes. Source: \cite{gleave2009tarificacion}}
+\label{table:cordon_charges}
+\begin{tabular}{ccc}
+\hline
+Link type& Outer cordon charge {[}\$2001{]} & Triangle cordon charge{[}\$2001{]}\\
+\hline
+Entry & 6.000 & 6.000   \\
+Exit  & 3.600 & 2.650 \\
+\hline
+\end{tabular}
+\end{table}
+\efloatseparator
+ 
+\begin{table}[h!]
+\centering
+\caption{Total car legs between 07:30 and 08:30.}
+\label{table:legs_variation}
+\begin{tabular}{ccc|cc|cc}
+\hline
+Case & Calibrated & Stability-Test & Outer Cordon & OC-ST [\%] & Triangle Cordon & TC-ST [\%] \\
+\hline
+ 1\%  & 3.028  & 3.176  & 2.431  & -23,46 & 3.035  & -4,44\% \\
+ 10\% & 30.391 & 31.293 & 24.195 & -22,68 & 30.011 & -4,10\% \\
+\hline
+\end{tabular}
+\end{table}
+\efloatseparator
+ 
+\begin{table}[h!]
+\centering
+\caption{Total traveled time consumed [hrs] between 07:30 and 08:30 by mode and case.}
+\label{table:travel_time_variation}
+\begin{tabular}{c|ccc|ccc}
+\cline{1-7}
+    & \multicolumn{3}{c|}{1\% case} & \multicolumn{3}{c}{10\% case} \\
+Scenario & car    & pt    & walk  & car     & pt    & walk   \\
+\cline{1-7}
+Calibrated & 1.259,49  & 3.955,84 & 2.592,29 & 7.286,88 & 42.041,63 & 25.599,89  \\
+ST   & 1.547,63  & 3.845,67 & 2.594,60 & 10.219,55 & 41.065,03 & 25.688,28  \\
+OC   & 989,24  & 4.172,21  & 2.714,39 & 6.642,63 & 44.203,02 & 26.631,29  \\
+TC   & 1.422,26  & 3.897,62 & 2.627,95 & 9.698,05 & 41.552,48 & 25.911,17  \\
+\hline
+OC-ST [\%]  & -36,08 & +8,49 & +4,62 & -35,00 & +7,64 & +3,67 \\
+TC-ST [\%]  & -8,10  & +1,35 & +1,29 & -5,10  & +1,19 & +0,87 \\
+\cline{1-7}
+\end{tabular}
+\end{table}
+\efloatseparator
+ 
+\begin{table}
+\centering
+\caption{Percentage of variation in total traveled time consumed between 07:30 and 08:30 considering only car and public transport mode.}
+\label{table:travel_time_variation_car_pt}
+\begin{tabular}{ccc}
+\hline
+Scenario & 1\% case - $\Delta \mathit{t}$ [\%] & 10\% case - $\Delta \mathit{t}$ [\%] \\
+\hline
+OC-ST   & -4.30  & -0.86  \\
+TC-ST   & -1.36  & -0.07  \\
+\hline
+\end{tabular}
+\end{table}
+\efloatseparator
+ 
+\begin{table}[h!]
+\centering
+\caption{Total traveled distance consumed [km] between 07:30 and 08:30 for car mode and for each case.}
+\label{table:travel_distance_variation}
+\begin{tabular}{c|cc}
+\cline{1-3}
+Scenario & 1\% case - car  & 10\% case - car   \\
+\cline{1-3}
+Calibrated & 25.200,25 & 239.364,48  \\
+ST & 25.854,74 & 243.742,95  \\
+OC & 20.478,37 & 194.222,39  \\
+TC & 24.846,90 & 235.175,73  \\
+\hline
+OC-ST [\%]  & -20,79 & -20,32 \\
+TC-ST [\%]  & -3,90  & -3,51  \\
+\cline{1-3}
+\end{tabular}
+\end{table}
+\efloatseparator
+ 

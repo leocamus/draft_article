@@ -1,0 +1,82 @@
+\begin{figure}
+    \centering
+    \includegraphics[scale=0.4]{images/0_algoritmo.pdf}
+    \caption{MATSim algorithm. Source: \protect\cite{meister2011contribution}}
+    \label{fig:matsim_algorithm}
+\end{figure}
+\efloatseparator
+ 
+\begin{figure}
+    \centering
+    \includegraphics[scale=0.4]{images/1_CHI33SD.pdf}
+    \caption{Comparison of randomized public transport trip start times with $\sigma_{\chi^2}^{*}=33$ minutes (in red) and smartcard data (in gray).}
+    \label{histogram_comparition}
+\end{figure}
+\efloatseparator
+ 
+\begin{figure}
+\centering
+\includegraphics[width=.4\linewidth]{images/homeOriginal10AM.png}\hspace{1cm}
+\includegraphics[width=.4\linewidth]{images/homeRandomized10AM.png}
+\caption{Home activity location at 10:00 AM. Left: Before randomization. Right: After randomization}
+\label{homeDistribution}
+\end{figure}
+\efloatseparator
+ 
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.22]{images/1pct_it100.pdf}\hspace{1cm}
+\includegraphics[scale=0.22]{images/1pct_it600.pdf}
+\caption{Observed vs. simulated counts for 1\% case. Left: Before Cadyts application. Right: After Cadyts application}
+\label{fig:obs_vs_sim_1pct}
+\end{figure}
+\efloatseparator
+ 
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.22]{images/10pct_it100.pdf}\hspace{1cm}
+\includegraphics[scale=0.22]{images/10pct_it600.pdf}
+\caption{Observed vs. simulated counts for 10\% case. Left: Before Cadyts application. Right: After Cadyts application}
+\label{fig:obs_vs_sim_10pct}
+\end{figure}
+\efloatseparator
+ 
+\begin{figure}[h!]
+\begin{subfigure}{.5\linewidth}
+\centering
+\includegraphics[scale=.25]{images/calibratedDistancesComparison.pdf}
+\caption{Traveled distances - Calibrated Scenario}
+\end{subfigure}%
+\begin{subfigure}{.5\linewidth}
+\centering
+\includegraphics[scale=.25]{images/innovacionDistancesComparison.pdf}
+\caption{Traveled distances - Stability-test with innovation Scenario}
+\end{subfigure}\\[1ex]
+\begin{subfigure}{\linewidth}
+\centering
+\includegraphics[scale=.3]{images/calibratedTimesComparison.pdf}
+\caption{Travel times - Calibrated Scenario}
+\end{subfigure}
+\caption{Traveled distances and times distributions}
+\label{fig:times_distance_comparison}
+\end{figure}
+\efloatseparator
+ 
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.22]{images/outerCordon.pdf}\hspace{3cm}
+\includegraphics[scale=0.22]{images/triangleCordon.pdf}
+\caption{Cordon pricing schemes considered. Left: Outer Cordon. Right: Triangle Cordon}
+\label{fig:congestion_pricing_schemes}
+\end{figure}
+\efloatseparator
+ 
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.38]{images/modal_split_1pct.pdf}\hspace{0cm}
+\includegraphics[scale=0.38]{images/modal_split_10pct.pdf}
+\caption{Modal splits variation. Left: 1\% case scenarios. Right: 10\% case scenarios}
+\label{fig:modal_split_results}
+\end{figure}
+\efloatseparator
+ 

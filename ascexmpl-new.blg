@@ -1,0 +1,60 @@
+This is BibTeX, Version 0.99d (TeX Live 2017/Debian)
+Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
+The top-level auxiliary file: ascexmpl-new.aux
+The style file: ascelike-new.bst
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Database file #1: ascexmpl-new.bib
+`address' is a missing field, not a string, for entry balakrishna2006off
+while executing---line 1635 of file ascelike-new.bst
+Warning--there's a number but no series in gilbert2008agent
+Warning--empty journal in MATSimSantiago
+Warning--empty publisher in kickhofer2013rising
+Warning--empty journal in KickhoeferEtAl2016
+`address' is a missing field, not a string, for entry meister2011contribution
+while executing---line 1635 of file ascelike-new.bst
+Warning--empty journal in nagel1996parallel
+Warning--empty journal in gleave2009tarificacion
+`address' is a missing field, not a string, for entry wei2010critical
+while executing---line 1635 of file ascelike-new.bst
+You've used 45 entries,
+            2831 wiz_defined-function locations,
+            868 strings with 12837 characters,
+and the built_in function-call counts, 24295 in all, are:
+= -- 2467
+> -- 802
+< -- 132
++ -- 225
+- -- 213
+* -- 2019
+:= -- 3361
+add.period$ -- 94
+call.type$ -- 45
+change.case$ -- 326
+chr.to.int$ -- 45
+cite$ -- 51
+duplicate$ -- 1173
+empty$ -- 1794
+format.name$ -- 481
+if$ -- 4994
+int.to.chr$ -- 1
+int.to.str$ -- 0
+missing$ -- 34
+newline$ -- 186
+num.names$ -- 282
+pop$ -- 362
+preamble$ -- 1
+purify$ -- 595
+quote$ -- 0
+skip$ -- 1036
+stack$ -- 0
+substring$ -- 1587
+swap$ -- 322
+text.length$ -- 16
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 880
+warning$ -- 6
+while$ -- 164
+width$ -- 0
+write$ -- 601
+(There were 3 error messages)

@@ -19,15 +19,15 @@
 \begin{document}
 
 
-\title{MATSim Santiago: Development of an open large-scale agent-based transport simulation model and illustration with the application of a road pricing scheme}
+\title{MATSim Santiago -- an open, large-scale, agent-based transport simulation model for policy evaluation: application to road pricing anaylysis}
 
 \author[1]{Leonardo Camus}
 \author[2]{Alejandro Tirachini}
 \author[3]{Benjamin Kickh\"ofer}
 
-\affil[1]{First affiliation address, with corresponding author email. Email: author.one@email.com}
-\affil[2]{Second affiliation address}
-\affil[2]{Third affiliation address}
+\affil[1]{Entel Chile, leocamusc@gmail.com}
+\affil[2]{Universidad de Chile and Instituto Sistemas Complejos de Ingeniería, Chile, alejandro.tirachini@ing.uchile.cl}
+\affil[2]{Einride AB, Intelligent Movement, benjamin.kickhoefer@gmail.com}
 
 \maketitle
 
@@ -43,13 +43,15 @@ Summary + contributions.
 
 Urban agglomerations are a complex phenomenon. Taking a bottom-up perspective, cities are places where interactions occur constantly. Such a system poses different challenges in terms of both data gathering and modeling approaches, being the activity-transportation system and their interactions of particular interest. Given the constant growth of cities and the increasing concern about climate change, new methods to model and measure transport externalities properly are necessary in order to make better predictions and ultimately take better decisions.
 
-In this work an alternative to traditional modeling approach is applied to Santiago de Chile, where each transport user is simulated as a single agent who learns from its context based on repeated iterations that represent some real conditions. This model is later compared illustratively to the classical 4-step model using a congestion pricing scenario. Since Santiago combines different transport related conditions such as pollution problems during the winter season, concentration of work and study places in the wealthier north-eastern district and the existence of a tolled urban highways network, it represents an interesting case of study for the application of a metropolitan-scale transport and activity simulator \citep{KickhoeferEtAl2016}.
+One of the objectives of this work is to explore an alternative to the traditional aggregated modeling approach, thereby simulating each transport user as an individual agent who learns from experiences based on repeated iterations that represent real physical conditions. One advantage of this approach has become clear during the COVID-19 pandemic, where models that allow tracing individual persons, especially also in their household and work context, are needed
 
-The aim of this work is twofold: from one part, it represents an entry point to evaluate the general utility of this model at a metropolitan-scale in terms of both theoretical and practical terms. In addition to this, it is intended to demonstrate the capability of this approach to simulate a congestion pricing scheme and assess its impact using a classical modeling approach as a benchmark.
+This model is later compared illustratively to the classical 4-step model using a congestion pricing scenario using Santiago de Chile as a case of study. Since Santiago combines different transport related conditions such as pollution problems during the winter season, concentration of work and study places in the wealthier north-eastern district and the existence of a tolled urban highways network, it represents an interesting case of study for the application of a metropolitan-scale transport and activity simulator \citep{KickhoeferEtAl2016}.
 
-This paper is organized as follows: ...
+The contribution of this work are twofold: firstly, we present the scenario, developed by the authors using open data exclusively, which is freely available for researchers, policy makers and other institutions. Secondly, the paper demonstrates the capabilities of this approach by evaluating a congestion pricing scheme using a traditional road pricing study as a benchmark.
 
-%OK
+The remainder of the paper is organized as follows: first, a detailed review of transport modelling literature is presented, continuing with the description of the Multi-Agent Transport Simulation MATSim. Later, the Santiago Scenario, its improvements and the calibration process is presented, to continue with the evaluation of a congestion pricing scheme using MATSim and a classical aggregate transport model. Practical issues such as calibration challenges and scaling effects in this type of modeling are also addressed. The paper concludes with a discussion and conclusions.
+
+%Maybe we should reduce THE LITERATURE REVIEW section.
 \section{Literature Review: Transport system modelling approaches}
 \label{sec:literature_review}
 To understand transport system modeling approaches it is useful to split them into two different subsystems: demand models and assignment models, the former including everything related to people behavior and their decision processes with exception of route decisions and the latter including route choice plus all the physical models of network flows (supply models) \citep{flugel2014evaluation}. Typically, both subsystems are interacted such as demand models determine travel intensity which are subsequently used by the route-choice step, allowing the modeler to get the level of service of different network elements via the supply models. Repeating this process should finally end in an stable point which represents an equilibrium state.
@@ -80,7 +82,7 @@ An approach that has been explored in more recent years in the transport area is
 %ok.
 \section{MATSim}
 \label{sec:matsim}
-In this work, MATSim was used as the modelling framework to represent the Santiago's transport system. The complete algorithm of this model is summarized graphically in Figure \ref{fig:matsim_algorithm}. 
+In this work, MATSim was chosen as the modelling framework to represent the Santiago's transport system. The complete algorithm of this model is summarized graphically in Figure \ref{fig:matsim_algorithm}. 
 In this model, every agent represents a transport system user, who interacts with other agents when moving from an origin to a destination through the existing infrastructure, generally represented by the road network. A MATSim simulation is formed by a predefined number of iterations that represents the repetition of an average day. Agents' interaction allow them to evaluate their activity-travel chains (also called \emph{plans}) through a performance function which is then used to model the choice process between these alternatives.
 \begin{figure}
     \centering
